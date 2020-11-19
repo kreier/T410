@@ -8,9 +8,41 @@ Project with Raspberry Pi 1B
 
 ## Hardware
 
-We have a Raspberry Pi 1B from June 2012 with only the 26 pin on the GPIO header. On it a 480x320 3.5" display is mounted that needs a special driver. More on that in the Software section. It has only 2 USB2.0 ports. One for mouse/keyboard combo, the second for the TP-Link 8188eu WiFi dongle.
+We have a Raspberry Pi 1B from June 2012 with only the 26 pin on the GPIO header. On it a 480x320 3.5" display is mounted that needs a special driver. More on that in the Software section. It has only 2 USB2.0 ports. One for mouse/keyboard combo, the second for the TP-Link TL-WN725N WiFi dongle.
+
+![Raspberry Pi with 3.5" display](RPi-T410.jpg)
 
 ## Software
+
+Download the recent [Raspberry Pi OS](https://www.raspberrypi.org/software/) and install it on a SD card. I assume it is Raspbian Buster.
+
+### Wifi
+
+The WiFi dongle TP-Link TL-WN725N has the Realtek 8188eu chip on it that has only some old drivers in the repository that don't work. Following the recommendations from [MrEngman](http://downloads.fars-robotics.net/) you should edit the wpa_compliant file with
+
+``` sh
+me@rpi:~/ $ sudo nano /etc/wpa_supplicant/wpa_supplicant.conf
+```
+and enter
+```
+ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev
+update_config=1
+country=GB
+
+network={
+    ssid="Your-Network-Name"
+    psk="Your-Network-Password"
+}
+```
+
+Check your kernel version with ```uname -a```. Find and download the respective driver from the [fars-robotics.net](http://downloads.fars-robotics.net/wifi-drivers/8188eu-drivers/) website. Then unpack and install the driver:
+``` sh
+me@rpi:~/ $ tar xf 8188eu-your-kernel-version.tar.gz
+me@rpi:~/ $ sudo ./install.sh
+```
+After reboot it should work.
+
+### Display
 
 For the display you need this driver:
 

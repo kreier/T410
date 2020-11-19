@@ -10,6 +10,8 @@ Project with Raspberry Pi 1B v2
 
 We have a Raspberry Pi 1B from June 2012 with only the 26 pin on the GPIO header. On it a 480x320 3.5" display is mounted that needs a special driver. More on that in the Software section. It has only 2 USB2.0 ports. One for mouse/keyboard combo, the second for the TP-Link TL-WN725N WiFi dongle.
 
+![Raspberry Pi with 3.5" display](RPi-T410.jpg)
+
 ## Software
 
 Download the recent [Raspberry Pi OS](https://www.raspberrypi.org/software/) and install it on a SD card. I assume it is Raspbian Buster.
